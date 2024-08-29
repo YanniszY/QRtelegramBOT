@@ -23,8 +23,8 @@
 1. Клонируйте репозиторий на локальный компьютер:
 
     ```bash
-    git clone https://github.com/yourusername/qr-code-telegram-bot.git
-    cd qr-code-telegram-bot
+    git clone https://github.com/YanniszY/QRtelegramBOT.git
+    cd QRtelegramBOT
     ```
 
 2. Создайте и активируйте виртуальное окружение (опционально):
@@ -43,7 +43,7 @@
 4. Создайте файл `.env` в корне проекта и добавьте ваш токен Telegram API:
 
     ```env
-    TELEGRAM_TOKEN=your_telegram_bot_token
+    BOT_TOKEN=your_telegram_bot_token
     ```
 
 ## Запуск
