@@ -96,13 +96,13 @@ async def qr_code_event(callback_query: CallbackQuery, state: FSMContext):
 async def get_event_name(message: Message, state: FSMContext):
     await state.update_data(event_name=message.text)
     await state.set_state(UserOptions.start_time_event)
-    await message.answer("Введите дату и время начала события в формате YYYY M D H M\nПример: 2024 22 15 45")
+    await message.answer("Введите дату и время начала события в формате YYYY M D H M\nПример: 2024 08 15 12 30")
 
 @router.message(UserOptions.start_time_event)
 async def get_start_time(message: Message, state: FSMContext):
     await state.update_data(start_time_event=message.text)
     await state.set_state(UserOptions.end_time_event)
-    await message.answer("Введите дату и время окончания события в формате YYYY M D H M")
+    await message.answer("Введите дату и время окончания события в формате YYYY M D H M\nПример: 2024 08 15 16 45")
 
 @router.message(UserOptions.end_time_event)
 async def get_end_time(message: Message, state: FSMContext):
@@ -124,6 +124,7 @@ async def get_description_event(message: Message, state: FSMContext):
 
 @router.message(UserOptions.size_event)
 async def get_size_event(message: Message, state: FSMContext):
+    await state.update_data(size_event=message.text)
     data = await state.get_data()
     await generate_event_qr(data, message)
     await state.clear()
@@ -166,6 +167,7 @@ async def get_website_vcard(message: Message, state: FSMContext):
 
 @router.message(UserOptions.size_vcard)
 async def get_size_vcard(message: Message, state: FSMContext):
+    await state.update_data(size_vcard=message.text)
     data = await state.get_data()
     await generate_contact_card(data, message)
     await state.clear()

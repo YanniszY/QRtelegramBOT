@@ -3,6 +3,7 @@ import segno
 import tempfile
 import asyncio
 from datetime import datetime
+from segno import helpers
 
 # ? генерация QR кода
 async def generate_qr(userlink, qrcode_size, message: Message):
@@ -14,8 +15,9 @@ async def generate_qr(userlink, qrcode_size, message: Message):
         await message.answer_photo(photo=qr_code_file, caption="Вот ваш QR код")
 
 
+
 async def generate_pass_wifi(wifiname, wifipass, size, message: Message):
-    img = segno.helpers.make_wifi(ssid=wifiname, password=wifipass, security='WPA')
+    img = helpers.make_wifi(ssid=wifiname, password=wifipass, security='WPA')
     with tempfile.NamedTemporaryFile(delete=False, suffix=".png") as tmp_file:
 
         img.save(tmp_file.name, scale=int(size))
@@ -24,7 +26,7 @@ async def generate_pass_wifi(wifiname, wifipass, size, message: Message):
 
 
 async def generate_nopass_wifi(wifiname, size, message: Message):
-    img = segno.helpers.make_wifi(ssid=wifiname, security='nopass')
+    img = helpers.make_wifi(ssid=wifiname, security='nopass')
     with tempfile.NamedTemporaryFile(delete=False, suffix=".png") as tmp_file:
 
         img.save(tmp_file.name, scale=int(size))
